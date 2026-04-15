@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pendaftaran;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $pendaftaran = Pendaftaran::all();
+
+        return view('dashboard', compact('pendaftaran'));
     }
 }

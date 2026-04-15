@@ -16,18 +16,22 @@ class MasaPklController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'pendaftaran_id' => 'required',
-            'user_id' => 'required',
-            'divisi_id' => 'required',
-            'tgl_mulai' => 'required|date',
-            'tgl_selesai' => 'required|date'
-        ]);
+{
+    $request->validate([
+        'tgl_mulai' => 'required|date',
+        'tgl_selesai' => 'required|date'
+    ]);
 
-        MasaPkl::create($request->all());
+    MasaPkl::updateOrCreate(
+        ['user_id' => auth()->id()],
+        [
+            'user_id' => auth()->id(),
+            'tgl_mulai' => $request->tgl_mulai,
+            'tgl_selesai' => $request->tgl_selesai
+        ]
+    );
 
-        return redirect()->route('masa-pkl.create')
-            ->with('success', 'Masa PKL berhasil ditambahkan!');
-    }
+    return redirect()->route('dashboard')
+        ->with('success', 'Data masa PKL berhasil disimpan!');
+}
 }

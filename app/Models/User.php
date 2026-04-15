@@ -46,4 +46,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // RELASI DETAIL USER
+    public function detailUser()
+    {
+        return $this->hasOne(\App\Models\DetailUser::class);
+    }
+
+    // RELASI MASA PKL
+    public function masaPkl()
+    {
+        return $this->hasOne(\App\Models\MasaPkl::class);
+    }
 }

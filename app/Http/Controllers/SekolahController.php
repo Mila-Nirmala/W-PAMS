@@ -10,7 +10,12 @@ class SekolahController extends Controller
     // Tampil form tambah sekolah
     public function create()
     {
-        return view('create', ['type' => 'sekolah']);
+        $sekolahs = Sekolah::all();
+
+        return view('create', [
+            'type' => 'sekolah',
+            'sekolahs' => $sekolahs
+        ]);
     }
 
     // Simpan data sekolah baru

@@ -8,6 +8,9 @@ class DetailUser extends Model
 {
     protected $fillable = [
         'user_id',
+        'nama',
+        'nis',
+        'jurusan',
         'sekolah_id',
         'no_hp',
         'alamat',

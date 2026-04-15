@@ -78,6 +78,15 @@ Route::middleware(['auth'])->group(function () {
     // SIMPAN
     Route::post('/pendaftaran/store', [PendaftaranController::class, 'store'])
         ->name('pendaftaran.store');
+
+    Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'show'])
+    ->name('pendaftaran.show');
+
+    Route::get('/pendaftaran/{id}/terima', [PendaftaranController::class, 'terima'])
+        ->name('pendaftaran.terima');
+
+    Route::get('/pendaftaran/{id}/tolak', [PendaftaranController::class, 'tolak'])
+        ->name('pendaftaran.tolak');
 });
 
 require __DIR__.'/auth.php';

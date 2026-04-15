@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('masa_pkls', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('pendaftaran_id')->constrained()->onDelete('cascade');
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->foreignId('divisi_id')->constrained()->onDelete('cascade');
         $table->date('tgl_mulai')->nullable();
         $table->date('tgl_selesai')->nullable();
         $table->timestamps();

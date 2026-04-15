@@ -9,23 +9,16 @@
 
             <table class="table" style="background-color: #f8f9fa; border-radius:10px;">
                 <tbody>
+
                     <tr>
-                        <td>Sekolah</td>
-                        <td>
-                            <select name="sekolah_id" class="form-select" required>
-                                <option value="">-- Pilih Sekolah --</option>
-                                <option value="">SMKN 1 TASIKMALAYA</option>
-                                <option value="">SMKN 2 TASIKMALAYA</option>
-                                <option value="">SMKN 3 TASIKMALAYA</option>
-                                <option value="">SMKN 4 TASIKMALAYA</option>
-                                <option value="">SMK YAPSIPA</option>
-                                <option value="">SMK MITRABATIK</option>
-                                <option value="">SMK MANANGGA</option>
-                                <option value="">SMK BINA LESTARI</option>
-                            </select>
-                        </td>
+                        <td>Nama</td>
+                        <td><input type="text" name="nama" class="form-control" required></td>
                     </tr>
 
+                    <tr>
+                        <td>NIS</td>
+                        <td><input type="text" name="nis" class="form-control" required></td>
+                    </tr>
                     <tr>
                         <td>No HP</td>
                         <td><input type="text" name="no_hp" class="form-control" required></td>
@@ -34,6 +27,36 @@
                     <tr>
                         <td>Alamat</td>
                         <td><textarea name="alamat" class="form-control" required></textarea></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Sekolah</td>
+                        <td>
+                            <select name="sekolah_id" class="form-select" required>
+                            <option value="">-- Pilih Sekolah --</option>
+                            @foreach($sekolahs as $s)
+                            <option value="{{ $s->id }}">{{ $s->nama_sekolah }}</option>
+                            @endforeach
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Jurusan</td>
+                        <td>
+                            <select name="jurusan" class="form-select" required>
+                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="RPL/PPLG">RPL/PPLG</option>
+                                <option value="TKJT">TKJT</option>
+                                <option value="MANAJEMEN PERKANTORAN">MANAJEMEN PERKANTORAN</option>
+                                <option value="DKV">DKV</option>
+                                 <option value="AKL">AKL</option>
+                                <option value="TOI">TOI</option>
+                                <option value="TBSM">TBSM</option>
+                                <option value="PEMASARAN">PEMASARAN</option>
+                            </select>
+                        </td>
                     </tr>
 
                     <tr>
@@ -57,53 +80,6 @@
                     </tr>
 
                     <tr>
-                        <td></td>
-                        <td>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-
-        {{-- ================= FORM SEKOLAH ================= --}}
-         @elseif($type == 'sekolah')
-        <h2 class="text-center mb-4">ISI DATA SEKOLAH</h2>
-
-        <form action="{{ route('sekolah.store') }}" method="POST">
-            @csrf
-
-            <table class="table" style="background-color: #f8f9fa; border-radius:10px;">
-                <tbody>
-                    <tr>
-                        <td>Nama Sekolah</td>
-                        <td>
-                            <select name="nama_sekolah" class="form-select" required>
-                                <option value="">-- Pilih Sekolah --</option>
-                                <option value="">SMKN 1 TASIKMALAYA</option>
-                                <option value="">SMKN 2 TASIKMALAYA</option>
-                                <option value="">SMKN 3 TASIKMALAYA</option>
-                                <option value="">SMKN 4 TASIKMALAYA</option>
-                                <option value="">SMK YAPSIPA</option>
-                                <option value="">SMK MITRABATIK</option>
-                                <option value="">SMK MANANGGA</option>
-                                <option value="">SMK BINA LESTARI</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Alamat Sekolah</td>
-                        <td><textarea name="alamat_sekolah" class="form-control" required></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td>Telephone Sekolah</td>
-                        <td><input type="text" name="tlp_sekolah" class="form-control" required></td>
-                    </tr>
-
-
-                                <tr>
                         <td></td>
                         <td>
                             <button type="submit" class="btn btn-success">Simpan</button>
@@ -147,7 +123,7 @@
         {{-- ================= FORM PENDAFTARAN  ================= --}}
         @elseif($type == 'pendaftaran')
         <h2 class="text-center mb-4">ISI DATA PENDAFTARAN</h2>
-        <form action="{{ route('pendaftaran.store') }}" method="POST">
+        <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <table class="table" style="background-color: #f8f9fa; border-radius:10px;">
@@ -156,15 +132,10 @@
                         <td>Sekolah</td>
                         <td>
                             <select name="sekolah_id" class="form-select" required>
-                                <option value="">-- Pilih Sekolah --</option>
-                                <option value="">SMKN 1 TASIKMALAYA</option>
-                                <option value="">SMKN 2 TASIKMALAYA</option>
-                                <option value="">SMKN 3 TASIKMALAYA</option>
-                                <option value="">SMKN 4 TASIKMALAYA</option>
-                                <option value="">SMK YAPSIPA</option>
-                                <option value="">SMK MITRABATIK</option>
-                                <option value="">SMK MANANGGA</option>
-                                <option value="">SMK BINA LESTARI</option>
+                            <option value="">-- Pilih Sekolah --</option>
+                            @foreach($sekolahs as $s)
+                            <option value="{{ $s->id }}">{{ $s->nama_sekolah }}</option>
+                            @endforeach
                             </select>
                         </td>
                     </tr>
@@ -180,11 +151,14 @@
                         <td>
                             <select name="jurusan" class="form-select" required>
                                 <option value="">-- Pilih Jurusan --</option>
-                                <option value="">RPL/PPLG</option>
-                                <option value="">TKJT</option>
-                                <option value="">MANAJEMEN PERKANTORAN</option>
-                                <option value="">DKV</option>
-                                <option value="">AKUNTANSI</option>
+                                <option value="RPL/PPLG">RPL/PPLG</option>
+                                <option value="TKJT">TKJT</option>
+                                <option value="MANAJEMEN PERKANTORAN">MANAJEMEN PERKANTORAN</option>
+                                <option value="DKV">DKV</option>
+                                <option value="AKUNTANSI">AKL</option>
+                                <option value="DKV">TOI</option>
+                                <option value="DKV">TBSM</option>
+                                <option value="DKV">PEMASARAN</option>
                             </select>
                         </td>
                     </tr>
