@@ -111,9 +111,15 @@
 Tentukan divisi tempat siswa menjalani kegiatan PKL
 </p>
 
-<a href="#" class="btn btn-danger btn-sm w-100">
-Pilih Divisi
-</a>
+@if($pendaftaran->divisi_id)
+    <a href="{{ route('pendaftaran.divisi.form', $pendaftaran->id) }}" class="btn btn-success">
+        ✔ Divisi Dipilih
+    </a>
+@else
+    <a href="{{ route('pendaftaran.divisi.form', $pendaftaran->id) }}" class="btn btn-danger">
+        Pilih Divisi
+    </a>
+@endif
 
 </div>
 </div>
@@ -157,6 +163,7 @@ Upload Sertifikat
 <i class="bi bi-arrow-left"></i> Kembali
 </a>
 </div>
+
 
 
 </div>

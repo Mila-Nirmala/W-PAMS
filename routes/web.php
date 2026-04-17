@@ -87,6 +87,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pendaftaran/{id}/tolak', [PendaftaranController::class, 'tolak'])
         ->name('pendaftaran.tolak');
+
+    Route::get('/pendaftaran/{id}/divisi', [PendaftaranController::class, 'formDivisi'])
+        ->name('pendaftaran.divisi.form');
+
+    Route::put('/pendaftaran/{id}/divisi', [PendaftaranController::class, 'setDivisi'])
+        ->name('admin.pkl.setDivisi');
 });
 
 require __DIR__.'/auth.php';

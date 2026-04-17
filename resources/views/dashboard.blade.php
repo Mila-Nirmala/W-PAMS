@@ -211,8 +211,8 @@
                                         Lengkapi data diri sebelum melakukan pendaftaran PKL
                                     </p>
                                     <a href="{{ route('detail-user.create') }}" 
-                                    class="btn btn-primary w-100">
-                                    Isi Detail User
+                                       class="btn {{ $detailUser ? 'btn-success' : 'btn-danger' }} w-100">
+                                       {{ $detailUser ? '✔ Sudah Diisi' : 'Isi Detail User' }}
                                     </a>
                                 </div>
                             </div>
@@ -230,8 +230,8 @@
                                         Tentukan tanggal mulai dan selesai kegiatan PKL
                                     </p>
                                     <a href="{{ route('masa-pkl.create') }}" 
-                                    class="btn btn-success w-100">
-                                    Isi Masa PKL
+                                       class="btn {{ $masaPkl ? 'btn-success' : 'btn-danger' }} w-100">
+                                       {{ $masaPkl ? '✔ Sudah Diisi' : 'Isi Masa PKL' }}
                                     </a>
                                 </div>
                             </div>
@@ -249,8 +249,8 @@
                                         Setelah data lengkap, lakukan pendaftaran PKL
                                     </p>
                                     <a href="{{ route('pendaftaran.create') }}" 
-                                    class="btn btn-warning w-100">
-                                    Daftar PKL
+                                       class="btn {{ $pendaftaran ? 'btn-success' : 'btn-danger' }} w-100">
+                                       {{ $pendaftaran ? '✔ Sudah Daftar' : 'Daftar PKL' }}
                                     </a>
                                 </div>
                             </div>

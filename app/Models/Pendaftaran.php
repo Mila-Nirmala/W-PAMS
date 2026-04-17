@@ -12,7 +12,8 @@ class Pendaftaran extends Model
         'tgl_pendaftaran',
         'status',
         'jurusan',
-        'surat_rekomendasi'
+        'surat_rekomendasi',
+        'divisi_id'
     ];
 
     // Relasi ke DetailUser
@@ -49,5 +50,11 @@ class Pendaftaran extends Model
     public function nilaiPkl()
     {
         return $this->hasOne(NilaiPkl::class);
+    }
+
+    // Relasi ke Divisi
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
     }
 }

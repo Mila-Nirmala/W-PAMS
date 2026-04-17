@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pendaftaran;
 use App\Models\Sekolah;
+use App\Models\Divisi;
 use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
@@ -55,8 +56,9 @@ class PendaftaranController extends Controller
 
     $detailUser = $pendaftaran->user->detailUser;
     $masaPkl = $pendaftaran->user->masaPkl;
+    $divisis = Divisi::all();
 
-    return view('pendaftaran.show', compact('pendaftaran','detailUser','masaPkl'));
+    return view('pendaftaran.show', compact('pendaftaran','detailUser','masaPkl','divisis'));
 }
 
     public function terima($id)
@@ -75,5 +77,27 @@ class PendaftaranController extends Controller
         $pendaftaran->save();
 
         return redirect()->back();
+    }
+
+    public function formDivisi($id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $divisis = Divisi::all();
+
+        return view('pendaftaran.divisi', compact('pendaftaran', 'divisis'));
+    }
+
+    public function setDivisi(Request $request, $id)
+    {
+        $request->validate([
+            'divisi_id' => 'required|exists:divisis,id'
+        ]);
+
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $pendaftaran->divisi_id = $request->divisi_id;
+        $pendaftaran->save();
+
+        return redirect()->route('pendaftaran.show', $id)
+            ->with('success', 'Divisi berhasil dipilih');
     }
 }
