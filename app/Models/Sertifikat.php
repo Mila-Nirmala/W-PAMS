@@ -10,7 +10,7 @@ class Sertifikat extends Model
         'masa_pkl_id',
         'no_sertifikat',
         'tanggal_terbit',
-        'kepala_kampus'
+        'kepala_kampus',
         'file_path'
     ];
     

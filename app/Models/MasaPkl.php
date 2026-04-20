@@ -17,4 +17,14 @@ class MasaPkl extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sertifikat()
+    {
+    return $this->hasOne(\App\Models\Sertifikat::class, 'masa_pkl_id');
+    }
+
+    public function pendaftaran()
+    {
+    return $this->belongsTo(\App\Models\Pendaftaran::class);
+    }
 }

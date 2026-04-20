@@ -14,7 +14,7 @@
 <div class="col-md-6">
 <div class="card shadow border-0 h-100">
 
-<div class="card-header bg-primary text-white fw-semibold">
+<div class="card-header bg-success text-white fw-semibold">
 <i class="bi bi-person-fill me-2"></i> Data Siswa
 </div>
 
@@ -93,6 +93,7 @@
 </table>
 
 @if($pendaftaran->status == 'Diterima')
+
 <!-- Card di bawah tanggal -->
 <div class="row g-3 mt-2">
 
@@ -111,21 +112,18 @@
 Tentukan divisi tempat siswa menjalani kegiatan PKL
 </p>
 
-@if($pendaftaran->divisi_id)
-    <a href="{{ route('pendaftaran.divisi.form', $pendaftaran->id) }}" class="btn btn-success">
-        ✔ Divisi Dipilih
-    </a>
-@else
-    <a href="{{ route('pendaftaran.divisi.form', $pendaftaran->id) }}" class="btn btn-danger">
-        Pilih Divisi
-    </a>
-@endif
+<a href="{{ route('pendaftaran.divisi.form', $pendaftaran->id) }}" 
+class="btn {{ $pendaftaran->divisi_id ? 'btn-success' : 'btn-danger' }} btn-sm w-100">
+
+{{ $pendaftaran->divisi_id ? '✔ Divisi Dipilih' : 'Pilih Divisi' }}
+
+</a>
 
 </div>
 </div>
 </div>
 
-<!-- Card Upload Sertifikat -->
+<!-- Card Sertifikat -->
 <div class="col-md-6">
 <div class="card shadow border-light h-100">
 <div class="card-body text-center">
@@ -140,8 +138,11 @@ Tentukan divisi tempat siswa menjalani kegiatan PKL
 Upload sertifikat PKL setelah siswa menyelesaikan kegiatan
 </p>
 
-<a href="#" class="btn btn-danger btn-sm w-100">
-Upload Sertifikat
+<a href="{{ route('sertifikat.create', $masaPkl->id) }}" 
+class="btn {{ $masaPkl->sertifikat ? 'btn-success' : 'btn-danger' }} btn-sm w-100">
+
+{{ $masaPkl->sertifikat ? '✔ Sertifikat Sudah Upload' : 'Upload Sertifikat' }}
+
 </a>
 
 </div>
@@ -149,20 +150,8 @@ Upload Sertifikat
 </div>
 
 </div> <!-- row -->
+
 @endif
-
-</div> <!-- card-body -->
-</div> <!-- card -->
-</div> <!-- col-md-6 -->
-
-</div> <!-- END ROW -->
-
-<!-- tombol kembali -->
-<div class="text-center mt-4">
-<a href="{{ route('dashboard') }}" class="btn btn-secondary px-4">
-<i class="bi bi-arrow-left"></i> Kembali
-</a>
-</div>
 
 
 

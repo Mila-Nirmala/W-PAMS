@@ -7,6 +7,7 @@ use App\Http\Controllers\DetailUserController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\MasaPklController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\SertifikatController;
 
 // Halaman landing
 Route::get('/', function () {
@@ -93,6 +94,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/pendaftaran/{id}/divisi', [PendaftaranController::class, 'setDivisi'])
         ->name('admin.pkl.setDivisi');
+});
+
+// Sertifikat (Upload Sertifikat)
+Route::middleware(['auth'])->group(function () {
+
+    // FORM
+    Route::get('/sertifikat/create/{id}', [SertifikatController::class, 'create'])
+        ->name('sertifikat.create');
+
+    // SIMPAN
+    Route::post('/sertifikat/store', [SertifikatController::class, 'store'])
+        ->name('sertifikat.store');
 });
 
 require __DIR__.'/auth.php';

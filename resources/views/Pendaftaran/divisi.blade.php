@@ -46,10 +46,25 @@
             @endforeach
         </div>
 
-        <div class="mt-4 d-flex gap-2">
-            <button class="btn btn-success">Simpan</button>
-            <a href="{{ route('pendaftaran.show', $pendaftaran->id) }}" class="btn btn-secondary">Kembali</a>
-        </div>
+        <!-- BUTTON -->
+<div class="col-12 text-center mt-4">
+
+@if(isset($divisis))
+    <button class="btn btn-success px-4 rounded-pill">
+        ✔ Update Divisi
+    </button>
+@else
+    <button class="btn btn-primary px-4 rounded-pill">
+        Simpan Divisi
+    </button>
+@endif
+
+<a href="{{ route('pendaftaran.show', $pendaftaran->id) }}" 
+class="btn btn-outline-secondary px-4 rounded-pill ms-2">
+    Kembali
+</a>
+
+</div>
 
     </form>
 </div>
