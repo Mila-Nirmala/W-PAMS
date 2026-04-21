@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pendaftaran;
 use App\Models\Sekolah;
 use App\Models\Divisi;
+use App\Models\MasaPkl;
 use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
@@ -47,28 +48,45 @@ class PendaftaranController extends Controller
     }
 
         public function show($id)
-    {
+{
     $pendaftaran = Pendaftaran::with([
         'user.detailUser',
-        'user.masaPkl',
-        'sekolah'
+        'sekolah',
     ])->findOrFail($id);
 
     $detailUser = $pendaftaran->user->detailUser;
-    $masaPkl = $pendaftaran->user->masaPkl;
+
+    // 🔥 ambil masa PKL yang benar berdasarkan pendaftaran
+   $masaPkl = MasaPkl::with('sertifikat')
+    ->where('user_id', $pendaftaran->user_id)
+    ->latest('id') // 🔥 pastikan ambil yang terbaru
+    ->first();
+
     $divisis = Divisi::all();
 
-    return view('pendaftaran.show', compact('pendaftaran','detailUser','masaPkl','divisis'));
+    return view('pendaftaran.show', compact(
+        'pendaftaran',
+        'detailUser',
+        'masaPkl',
+        'divisis'
+    ));
 }
 
-    public function terima($id)
-    {
-        $pendaftaran = Pendaftaran::findOrFail($id);
-        $pendaftaran->status = 'Diterima';
-        $pendaftaran->save();
+   public function terima($id)
+{
+    $pendaftaran = Pendaftaran::findOrFail($id);
+    $pendaftaran->status = 'Diterima';
+    $pendaftaran->save();
 
-        return redirect()->back();
-    }
+    // 🔥 BUAT MASA PKL OTOMATIS
+    \App\Models\MasaPkl::create([
+        'user_id' => $pendaftaran->user_id,
+        'tgl_mulai' => now(),
+        'tgl_selesai' => null
+    ]);
+
+    return redirect()->back();
+}
 
     public function tolak($id)
     {

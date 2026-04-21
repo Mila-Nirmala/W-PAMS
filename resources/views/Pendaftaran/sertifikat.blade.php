@@ -77,7 +77,7 @@ value="{{ old('kepala_kampus', $sertifikat->kepala_kampus ?? '') }}">
 <!-- BUTTON -->
 <div class="col-12 text-center mt-4">
 
-@if(isset($sertifikat))
+@if($sertifikat && $sertifikat->no_sertifikat)
     <button class="btn btn-success px-4 rounded-pill">
         ✔ Update Sertifikat
     </button>
@@ -87,10 +87,16 @@ value="{{ old('kepala_kampus', $sertifikat->kepala_kampus ?? '') }}">
     </button>
 @endif
 
+@if($pendaftaran)
 <a href="{{ route('pendaftaran.show', $pendaftaran->id) }}" 
 class="btn btn-outline-secondary px-4 rounded-pill ms-2">
     Kembali
 </a>
+@else
+<button class="btn btn-secondary px-4 rounded-pill ms-2" disabled>
+    Data tidak ditemukan
+</button>
+@endif
 
 </div>
 

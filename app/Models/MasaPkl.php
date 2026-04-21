@@ -12,19 +12,16 @@ class MasaPkl extends Model
         'tgl_selesai'
     ];
 
-    // Relasi ke User
+    // ke user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+
+    // ke sertifikat (1 masa PKL = 1 sertifikat)
     public function sertifikat()
     {
-    return $this->hasOne(\App\Models\Sertifikat::class, 'masa_pkl_id');
-    }
-
-    public function pendaftaran()
-    {
-    return $this->belongsTo(\App\Models\Pendaftaran::class);
+        return $this->hasOne(Sertifikat::class, 'masa_pkl_id', 'id');
     }
 }

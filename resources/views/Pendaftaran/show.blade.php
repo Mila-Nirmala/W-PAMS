@@ -141,7 +141,7 @@ Upload sertifikat PKL setelah siswa menyelesaikan kegiatan
 <a href="{{ route('sertifikat.create', $masaPkl->id) }}" 
 class="btn {{ $masaPkl->sertifikat ? 'btn-success' : 'btn-danger' }} btn-sm w-100">
 
-{{ $masaPkl->sertifikat ? '✔ Sertifikat Sudah Upload' : 'Upload Sertifikat' }}
+{{ $masaPkl && $masaPkl->sertifikat ? '✔ Sertifikat Sudah Upload' : 'Upload Sertifikat' }}
 
 </a>
 

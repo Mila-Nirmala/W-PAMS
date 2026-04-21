@@ -49,7 +49,7 @@
         <!-- BUTTON -->
 <div class="col-12 text-center mt-4">
 
-@if(isset($divisis))
+@if($pendaftaran->divisi_id)
     <button class="btn btn-success px-4 rounded-pill">
         ✔ Update Divisi
     </button>

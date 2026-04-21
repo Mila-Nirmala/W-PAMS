@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sertifikat;
 use App\Models\MasaPkl;
+use App\Models\Pendaftaran; // 🔥 jangan lupa ini
 
 class SertifikatController extends Controller
 {
@@ -12,8 +13,10 @@ class SertifikatController extends Controller
     {
         $masaPkl = MasaPkl::findOrFail($id);
 
-        // 🔥 ambil pendaftaran dari relasi
-        $pendaftaran = $masaPkl->pendaftaran;
+        // 🔥 ambil pendaftaran dari user
+        $pendaftaran = Pendaftaran::where('user_id', $masaPkl->user_id)
+            ->latest()
+            ->first();
 
         // 🔥 ambil sertifikat kalau sudah ada
         $sertifikat = Sertifikat::where('masa_pkl_id', $id)->first();
@@ -33,17 +36,17 @@ class SertifikatController extends Controller
 
         $masaPkl = MasaPkl::findOrFail($request->masa_pkl_id);
 
-        // 🔥 cek apakah sudah ada sertifikat
+        // 🔥 ambil sertifikat lama (kalau ada)
         $sertifikat = Sertifikat::where('masa_pkl_id', $request->masa_pkl_id)->first();
 
-        // 🔥 handle upload file
+        // 🔥 upload file
         if ($request->hasFile('file_path')) {
             $file = $request->file('file_path')->store('sertifikat', 'public');
         } else {
             $file = $sertifikat->file_path ?? null;
         }
 
-        // 🔥 update atau create
+        // 🔥 simpan / update
         Sertifikat::updateOrCreate(
             ['masa_pkl_id' => $request->masa_pkl_id],
             [
@@ -54,8 +57,18 @@ class SertifikatController extends Controller
             ]
         );
 
-        // 🔥 balik ke halaman detail
-        return redirect()->route('pendaftaran.show', $masaPkl->pendaftaran_id)
+        // 🔥 ambil pendaftaran (INI YANG TADI KURANG)
+        $pendaftaran = Pendaftaran::where('user_id', $masaPkl->user_id)
+            ->latest()
+            ->first();
+
+        // 🔥 kalau gak ada, jangan error
+        if (!$pendaftaran) {
+            return redirect()->back()->with('error', 'Pendaftaran tidak ditemukan');
+        }
+
+        // 🔥 redirect aman
+        return redirect()->route('pendaftaran.show', $pendaftaran->id)
             ->with('success', 'Sertifikat berhasil disimpan');
     }
 }
