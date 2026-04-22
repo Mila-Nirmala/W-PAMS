@@ -1,9 +1,38 @@
 <x-app-layout>
+    <div style="background:#f59e0b; height:10px;"></div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <div class="flex items-center justify-between">
+        <img src="{{ asset('images/lp3ipanjang.png') }}" style="height:70px;">
+        
+        <div class="flex items-center gap-4">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+
+        <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    <button class="bg-success text-blue-900 px-3 py-1 rounded-md text-sm font-medium">
+                        {{ Auth::user()->name }}
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('profile.edit')">
+                        Profile
+                    </x-dropdown-link>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            Log Out
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-dropdown>
+            </div>
+    </div>
+</x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

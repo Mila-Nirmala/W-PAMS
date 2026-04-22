@@ -50,7 +50,7 @@ class SertifikatController extends Controller
         Sertifikat::updateOrCreate(
             ['masa_pkl_id' => $request->masa_pkl_id],
             [
-                'no_sertifikat' => $request->no_sertifikat,
+                'no_sertifikat' => 'SRT-' . date('YmdHis') . rand(100,999),
                 'tanggal_terbit' => $request->tanggal_terbit,
                 'kepala_kampus' => $request->kepala_kampus,
                 'file_path' => $file

@@ -25,21 +25,31 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+            
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            <header style="background-color:#1e3a8a; color:white; border-bottom:4px solid #f59e0b;">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
+        <h2 class="text-xl font-semibold text-white">
+            {{ $header ?? ucfirst(Request::segment(1) ?? 'Dashboard') }}
+        </h2>
+
+    </div>
+</header>
 
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+            
+            @include('layouts.footer')
+
         </div>
+
+        
     </body>
+
+
 </html>
