@@ -4,7 +4,17 @@
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 <div class="p-6 text-gray-900">
 
-<h4 class="mt-5 text-center fw-bold mb-5">Detail Pendaftar PKL</h4>
+<!-- Tombol Kembali -->
+<div class="mb-3">
+    <a href="{{ route('dashboard') }}" class="btn btn-danger btn-sm">
+         Kembali
+    </a>
+</div>
+
+<!-- Judul -->
+<h4 class="text-center fw-bold mb-5">
+    Detail Pendaftar PKL
+</h4>
 <div class="py-8">
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -87,7 +97,12 @@
 
 <tr>
 <th>Tanggal Selesai</th>
-<td>{{ $masaPkl->tgl_selesai }}</td>
+<td>
+    {{ $masaPkl->tgl_selesai 
+        ? \Carbon\Carbon::parse($masaPkl->tgl_selesai)->format('d-m-Y') 
+        : 'Belum ditentukan' 
+    }}
+</td>
 </tr>
 
 </table>
